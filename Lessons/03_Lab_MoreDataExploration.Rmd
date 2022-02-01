@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Objectives
 1. Discuss and navigate different data types in R
-2. Create, manipulate, and explore datasets
+2. Create, manipulate, and explore datasets 
 3. Date objects
 
 ## Data Types in R
