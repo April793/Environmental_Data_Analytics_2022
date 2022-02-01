@@ -60,6 +60,48 @@ Visualize count data for categorical variables.
 ```{r, fig.height = 3, fig.width = 4}
 ggplot(USGS.flow.data, aes(x = discharge.mean.approval)) +
   geom_bar()
+
+ggplot(na.omit(USGS.flow.data), aes(x = discharge.mean.approval)) +
+  geom_bar()
+
+ggplot(na.omit(USGS.flow.data), aes(x = discharge.mean.approval))
+  geom_bar()
+
+  #April   
+NAFact <- function(x){
+   if (x= "NA" ){
+     x
+   }
+}
+NAFact(USGS.flow.data$discharge.mean.approval)
+summary(NAFact)
+# April
+summary(USGS.flow.data$discharge.mean.approval)
+length(USGS.flow.data$discharge.mean.approval)
+na.omit(USGS.flow.data$discharge.mean.approval)
+length(USGS.flow.data$discharge.mean.approval)
+
+#check na
+is.na(USGS.flow.data$discharge.mean.approval)
+#turned "" into na
+
+NAkeep <- function(x){
+  if (x == "") {
+    x <- NA
+  }
+  else {
+    x
+  }
+}
+Kept1 <- NAkeep(USGS.flow.data$discharge.mean.approval)
+Kept1
+
+USGS.flow.data$discharge.mean.approval <- NAkeep(USGS.flow.data$discharge.mean.approval)
+
+summary(USGS.flow.data$discharge.mean.approval)
+
+  
+  
 ```
 
 ### Histogram (function: geom_histogram)

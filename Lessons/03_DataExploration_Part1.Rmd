@@ -165,6 +165,11 @@ Notice in our dataset that our discharge and gage height observations have many 
 ```{r findNA}
 summary(USGS.flow.data$discharge.mean)
 summary(USGS.flow.data$gage.height.mean)
+
+#April added
+summary(na.omit(USGS.flow.data$discharge.mean))
+summary(USGS.flow.data$discharge.mean.approval)
+summary(na.omit(USGS.flow.data$discharge.mean.approval))
 ```
 Question: What types of research questions might make it favorable to remove NAs from a dataset, and what types of research questions might make it favorable to retain NAs in the dataset?
 

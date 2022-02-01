@@ -15,7 +15,7 @@ This exercise accompanies the lessons in Environmental Data Analytics on Data Ex
 3. Be sure to **answer the questions** in this assignment document.
 4. When you have completed the assignment, **Knit** the text and code into a single PDF file.
 5. After Knitting, submit the completed exercise (PDF file) to the dropbox in Sakai. Add your last name into the file name (e.g., "FirstLast_A03_DataExploration.Rmd") prior to submission.
-
+ 
 The completed exercise is due on <>.
 
 
@@ -27,7 +27,7 @@ getwd()
 #install.packages("tidyverse")
 library(tidyverse)
 Neonics <- read.csv("../Data/Raw/ECOTOX_Neonicotinoids_Insects_raw.csv", stringsAsFactors = TRUE)
-Litter <- read.csv("../Data/Raw/NEON_NIWO_Litter_massdata_2018-08_raw.csv", stringsAsFactors = TRUE)
+Litter <- read.csv("../Data/Raw/NEON_NIWO_Litter_massdata_2018-08_raw.csv", stringsAsFactors = TRUE) 
 ```
 
 ## Learn about your system
