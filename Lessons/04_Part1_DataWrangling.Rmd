@@ -28,6 +28,8 @@ library(tidyverse)
 #install.packages(lubridate)
 library(lubridate)
 NTL.phys.data <- read.csv("./Data/Raw/NTL-LTER_Lake_ChemistryPhysics_Raw.csv", stringsAsFactors = TRUE)
+NTL.phys.data <- read.csv("./Data/Raw/NTL-LTER_Lake_ChemistryPhysics_Raw.csv", stringsAsFactors = TRUE) #April exercised
+read.csv(file.choose()) #April exercised
 
 colnames(NTL.phys.data)
 head(NTL.phys.data)
@@ -38,6 +40,9 @@ dim(NTL.phys.data)
 class(NTL.phys.data$sampledate)
 # Format sampledate as date
 NTL.phys.data$sampledate <- as.Date(NTL.phys.data$sampledate, format = "%m/%d/%y")
+NTL.phys.data$sampledate <- as.Date(NTL.phys.data$sampledate, format = "%m/%d/%y") #April
+class(NTL.phys.data$sampledate) #April
+head(NTL.phys.data$sampledate) #April
 ```
 
 ## Data Wrangling
