@@ -1,6 +1,6 @@
 ---
 title: "Assignment 4: Data Wrangling"
-author: "Student Name"
+author: "April Qian"
 output: pdf_document
 geometry: margin=2.54cm
 ---
@@ -25,8 +25,36 @@ The completed exercise is due on Monday, Feb 7 @ 7:00pm.
 
 ```{r, message = FALSE}
 #1
+#(a)load the packages
+library(tidyverse)
+library(lubridate)
+
+#(b)import the datasets
+getwd()
+EPAair.03.NC2018 <- read.csv("../Data/Raw/EPAair_O3_NC2018_raw.csv", stringsAsFactors = TRUE)
+EPAair.03.NC2019 <- read.csv("../Data/Raw/EPAair_O3_NC2019_raw.csv", stringsAsFactors = TRUE)
+EPAair.PM25.NC2018 <- read.csv("../Data/Raw/EPAair_PM25_NC2018_raw.csv", stringsAsFactors = TRUE)
+EPAair.PM25.NC2019 <- read.csv("../Data/Raw/EPAair_PM25_NC2019_raw.csv", stringsAsFactors = TRUE)
+
 
 #2
+#(a)
+dim(EPAair.03.NC2018)
+colnames(EPAair.03.NC2018)
+str(EPAair.03.NC2018)
+#(b)
+dim(EPAair.03.NC2019)
+colnames(EPAair.03.NC2019)
+str(EPAair.03.NC2019)
+#(c)
+dim(EPAair.PM25.NC2018)
+colnames(EPAair.PM25.NC2018)
+str(EPAair.PM25.NC2018)
+#(d)
+dim(EPAair.PM25.NC2019)
+colnames(EPAair.PM25.NC2019)
+str(EPAair.PM25.NC2019)
+
 ```
 
 ## Wrangle individual datasets to create processed files.
@@ -37,12 +65,34 @@ The completed exercise is due on Monday, Feb 7 @ 7:00pm.
 
 ```{r}
 #3
-
+#(a) class the date 
+class(EPAair.03.NC2018$Date) #all the others are the same, here omitted
+#(b) change to a date object
+EPAair.03.NC2018$Date <- mdy(EPAair.03.NC2018$Date)
+EPAair.03.NC2019$Date <- mdy(EPAair.03.NC2019$Date)
+EPAair.PM25.NC2018$Date <- mdy(EPAair.PM25.NC2018$Date)
+EPAair.PM25.NC2019$Date <- mdy(EPAair.PM25.NC2019$Date)
 #4
+EPAair.03.NC2018.select <- select(EPAair.03.NC2018, Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
+EPAair.03.NC2019.select <- select(EPAair.03.NC2019, Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
+EPAair.PM25.NC2018.select <- select(EPAair.PM25.NC2018, Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
+EPAair.PM25.NC2019.select <- select(EPAair.PM25.NC2019, Date, DAILY_AQI_VALUE, Site.Name, AQS_PARAMETER_DESC, COUNTY, SITE_LATITUDE, SITE_LONGITUDE)
 
-#5
+#5???
+# replace cannot be used, why??
+# EPAair.PM25.NC2018.select$AQS_PARAMETER_DESC <- replace(EPAair.PM25.NC2018.select$AQS_PARAMETER_DESC, "Acceptable PM2.5 AQI & Speciation Mass", "PM2.5")
 
-#6
+PM25.replace <- function(x){
+  ifelse(x == "Acceptable PM2.5 AQI & Speciation Mass", "PM2.5", x)
+}
+EPAair.PM25.NC2018.select$AQS_PARAMETER_DESC <- PM25.replace(EPAair.PM25.NC2018.select$AQS_PARAMETER_DESC)
+EPAair.PM25.NC2019.select$AQS_PARAMETER_DESC <- PM25.replace(EPAair.PM25.NC2019.select$AQS_PARAMETER_DESC)
+
+#6 save the files
+write.csv(EPAair.03.NC2018.select, row.names = FALSE, file = "../Data/Processed/EPAair_O3_NC2018_Processed.csv")
+write.csv(EPAair.03.NC2019.select, row.names = FALSE, file = "../Data/Processed/EPAair_O3_NC2019_Processed.csv")
+write.csv(EPAair.PM25.NC2018.select, row.names = FALSE, file = "../Data/Processed/EPAair_PM25_NC2018_Processed.csv")
+write.csv(EPAair.PM25.NC2019.select, row.names = FALSE, file = "../Data/Processed/EPAair_PM25_NC2019_Processed.csv")
 
 ```
 
