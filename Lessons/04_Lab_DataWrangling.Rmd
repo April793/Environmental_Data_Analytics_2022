@@ -98,6 +98,8 @@ NTL.phys.data.Ex4 <-
   filter(depth == 0) %>%
   filter(is.na(temperature_C))%>%
   summarise(mean = mean(temperature_C))
+
+NTL.phys.data.gathered <- pivot_longer(NTL.phys.data, irradianceWater: irradianceDeck, names_to = "irradiance", values_to = "radiation")
   
 ```
 
@@ -107,6 +109,8 @@ For gather we will use `pivot_longer` and for spread we will use `pivot_wider`.
 
 ```{r}
 #Exercise 5: gather irradiance data (measured in the water column and measured on the deck of the sampling boat) into one column using pivot_longer
+
+NTL.phys.data.spread <- pivot_longer(NTL.phys.data, names_to = "depth", values_from= "temperature_C")
 
 
 #Exercise 6: spread temperatureC into more than one column based on the depth
